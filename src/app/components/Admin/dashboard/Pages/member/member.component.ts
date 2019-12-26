@@ -1,32 +1,27 @@
+import { Page } from './../../../../../models/page';
 import { Account } from './../../../../../models/account';
 import { UsersService } from './../../../../../services/users/users.service';
-import { Component, OnInit, PipeTransform } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
-import { FormControl } from '@angular/forms';
-import { map, startWith } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-// import { FormControl } from '@angular/forms';
-// import { DecimalPipe } from '@angular/common';
-// import { startWith, map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+
 @Component({
   selector: 'app-member',
   templateUrl: './member.component.html',
-  styleUrls: ['./member.component.css'],
-  providers: [DecimalPipe]
+  styleUrls: ['./member.component.css']
 })
 export class MemberComponent implements OnInit {
-  userData: Account[];
-  userNewData$: Observable<Account[]>;
-  filter = new FormControl('');
-  constructor(private userService: UsersService, pipe: DecimalPipe ) {
-    this.userNewData$ = this.filter.valueChanges.pipe(
-      startWith(''),
-      map(text => this.searchUser(text, pipe))
-    );
+
+  constructor(private userService: UsersService) {
   }
+  userData: Account[];
+  totalPage = [];
+  searchText;
+
+  selectedUser: Account[];
 
   ngOnInit() {
+    this.setPage();
     this.getAllUser();
+    this.getTotalPage();
   }
   getAllUser(): void {
     this.userService
@@ -35,12 +30,22 @@ export class MemberComponent implements OnInit {
         this.userData = res.data;
       });
   }
-
-  searchUser(text: string, pipe: PipeTransform): Account[] {
-    return this.userData.filter(user => {
-      const term = text.toLowerCase();
-      return user.username.toLowerCase().includes(term)
-        || pipe.transform(user.role).includes(term);
-    } );
+  getTotalPage(): void {
+    this.userService
+      .getAllUser()
+      .subscribe((res) => {
+        // this.totalPage = res.totalPage;
+        for (let i = 1; i <= res.totalPage; i++) {
+          this.totalPage.push(i);
+        }
+        console.log(this.totalPage);
+      });
+  }
+  setPage() {
+    Page.iPage = 2;
+  }
+  onSelect(user: Account[]): void {
+    this.selectedUser = user;
+    // console.log(`selectedUser = ${JSON.stringify(this.selectedUser)}`);
   }
 }

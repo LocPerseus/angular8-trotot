@@ -1,5 +1,4 @@
 import { News } from './../../../../../shared/News.model';
-import { DataNews } from '../../../../../models/DataNews';
 import { NewsService } from './../../../../../services/news/news.service';
 import { Component, OnInit } from '@angular/core';
 @Component({
@@ -9,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsComponent implements OnInit {
 
+  searchText;
   newsData: News[];
   constructor( private newService: NewsService) { }
 

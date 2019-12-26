@@ -1,5 +1,5 @@
 export class Account {
-  public status: boolean;
+  public status: string;
   public role: string;
   // tslint:disable-next-line: variable-name
   public _id: string;

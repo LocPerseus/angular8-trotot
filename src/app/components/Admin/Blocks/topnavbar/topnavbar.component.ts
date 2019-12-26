@@ -12,7 +12,7 @@ export class TopnavbarComponent implements OnInit {
   customerInfo: User[] = [];
   name: string;
   lastname: { displayName: any; };
-  final: any;
+  public final: any;
   constructor(private auth: AuthService, private router: Router ) { }
   ngOnInit() {
     this.getUserInfo();
