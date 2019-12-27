@@ -33,6 +33,7 @@
                                 <th>Diện tích</th>
                                 <th>Địa chỉ</th>
                                 <th>Hình ảnh</th>
+                                <th>Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,6 +45,7 @@
                                 <td>{{theNews.area}}</td>
                                 <td>{{theNews.address}}</td>
                                 <td>{{theNews.image}}</td>
+                                <td><button type="button" class="btn btn-block btn-success" [class.selected]="theNews === selectedNews" (click)="setStatus(theNews)">{{theNews.status}}</button></td>
                             </tr>
                         </tbody>
                     </table>

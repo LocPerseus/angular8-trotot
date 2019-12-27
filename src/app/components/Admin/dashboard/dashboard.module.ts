@@ -13,9 +13,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 // ngbBoostrap
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetailMemberComponent } from './Pages/member/detail-member/detail-member.component';
 
 @NgModule({
-  declarations: [DashboardComponent, CategoryComponent, MemberComponent, NewsComponent, HomeDashboardComponent, ModalCategoryComponent],
+  // tslint:disable-next-line: max-line-length
+  declarations: [DashboardComponent, CategoryComponent, MemberComponent, NewsComponent, HomeDashboardComponent, ModalCategoryComponent, DetailMemberComponent],
   imports: [
     CommonModule,
     FormsModule,
