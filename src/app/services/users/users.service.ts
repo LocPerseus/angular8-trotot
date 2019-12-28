@@ -17,18 +17,28 @@ export class UsersService {
   private url = 'https://trototbe.herokuapp.com/api/admin/accounts/';
   constructor(private http: HttpClient) { }
   getAllUser(): Observable<DataUser> {
-    console.log(Page.iPage);
+    // console.log(Page.iPage);
     return this.http
-    // .get<DataUser>(`${this.url}?page=${Page.iPage}&pageSize=2`)
-    .get<DataUser>(this.url)
-    .pipe(
-      map(res => {
-        // console.log(res.data);
-        return res;
+      .get<DataUser>(`${this.url}`)
+      // .get<DataUser>(this.url)
+      .pipe(
+        map(res => {
+          // console.log(res.data);
+          return res;
+        })
+    );
+  }
+  getPageUsers(iPage: any): Observable<DataUser> {
+    return this.http
+      .get<DataUser>(`${this.url}?page=${iPage}&pageSize=5`)
+    // .get<DataUser>(this.url)
+      .pipe(
+        map(res => {
+          // console.log(res.data);
+          return res;
       })
     );
   }
-
   setStatus(user: any): Observable<DataUser> {
     return this.http
       .put<DataUser>(this.url, user, httpOption)

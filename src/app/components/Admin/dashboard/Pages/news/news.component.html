@@ -22,30 +22,32 @@
                     </div>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>STT</th>
                                 <th>Tiêu đề</th>
+                                <th>Trạng thái</th>
                                 <th>Nội dung mô tả</th>
                                 <th>Giá cho thuê</th>
                                 <th>Diện tích</th>
                                 <th>Địa chỉ</th>
                                 <th>Hình ảnh</th>
-                                <th>Trạng thái</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let theNews of newsData | filter:searchText; index as i">
+                            <tr *ngFor="let theNews of newsData | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }; index as i">
                                 <td>{{i+1}}</td>
                                 <td>{{theNews.title}}</td>
+                                <td><button type="button" [class]="theNews.status === 1 ? 'label label-danger' : 'label label-success'" (click)="setStatus(theNews)">{{theNews.status === 1 ? 'Ẩn' : 'Hiện'}}</button></td>
                                 <td>{{theNews.description}}</td>
                                 <td>{{theNews.price}}</td>
                                 <td>{{theNews.area}}</td>
                                 <td>{{theNews.address}}</td>
-                                <td>{{theNews.image}}</td>
-                                <td><button type="button" class="btn btn-block btn-success" [class.selected]="theNews === selectedNews" (click)="setStatus(theNews)">{{theNews.status}}</button></td>
+                                <td><img class="imgFix" src="{{theNews.image}}"></td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -53,11 +55,7 @@
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
                     <ul class="pagination pagination-sm no-margin pull-right">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">»</a></li>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     </ul>
                 </div>
             </div>

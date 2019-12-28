@@ -23,4 +23,8 @@ export class AuthService {
     // double negate return true or false. If exist token return true
     return !!localStorage.getItem('token');
   }
+  updateUser(user: any) {
+    return this.http
+      .put<any>(`${this.authUrl}/userinfo/${localStorage.getItem('id')}`, user );
+  }
 }

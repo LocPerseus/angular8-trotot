@@ -9,8 +9,8 @@ import { HomeDashboardComponent } from './Pages/home-dashboard/home-dashboard.co
 import { ModalCategoryComponent } from './Pages/modal-category/modal-category.component';
 
 const routes: Routes = [
-  { path: 'Dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
-    {path: 'category', component: CategoryComponent, children: [
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
+    {path: 'profile', component: CategoryComponent, children: [
       {path: 'create', component: ModalCategoryComponent}
     ]},
     {path: '', component: HomeDashboardComponent },

@@ -2,3 +2,8 @@
     background-color: #f56954 !important;
     color: white;
 }
+
+.imgFix {
+    width: 100px;
+    height: 100px;
+}

@@ -28,7 +28,7 @@ export class NewsService {
     .get<DataNews>(this._url)
     .pipe(
       map(res => {
-        console.log(res);
+        // console.log(res);
         // res.data.map(rs => {
         //   // tslint:disable-next-line: no-unused-expression
         //   rs;

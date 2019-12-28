@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
           // this.loginUserData = res;
           localStorage.setItem('token', res.token);
           localStorage.setItem('id', res.id);
-          this.router.navigate(['Dashboard']);
+          this.router.navigate(['dashboard']);
       },
         err => console.log(err)
       );
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   }
   checkToken() {
     if (localStorage.getItem('token')) {
-      this.router.navigate(['Dashboard']);
+      this.router.navigate(['dashboard']);
     }
   }
   // onSubmit(form: NgForm) {

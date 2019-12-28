@@ -9,10 +9,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./topnavbar.component.css']
 })
 export class TopnavbarComponent implements OnInit {
-  customerInfo: User[] = [];
-  name: string;
-  lastname: { displayName: any; };
-  public final: any;
+
+  userInfo: User;
+  displayName: string;
   constructor(private auth: AuthService, private router: Router ) { }
   ngOnInit() {
     this.getUserInfo();
@@ -21,12 +20,8 @@ export class TopnavbarComponent implements OnInit {
     this.auth
       .getInfoUser()
       .subscribe(res => {
-        this.customerInfo = res;
-        // console.log(this.customerInfo);
-        this.name = JSON.stringify(this.customerInfo);
-        this.lastname = JSON.parse(this.name);
-        // console.log(this.lastname.displayName);
-        this.final = this.lastname.displayName;
+        this.userInfo = res;
+        this.displayName = this.userInfo.displayName;
       });
   }
 

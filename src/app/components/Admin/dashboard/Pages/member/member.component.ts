@@ -19,46 +19,62 @@ export class MemberComponent implements OnInit {
   searchText;
   selectedUser: Account;
   termUser: {};
+  iPage = 1;
+  filterStatus = 'XEM_TAT_CA';
+  currentStyle: {};
+  // setStyleStatus() {
+  //   this.currentStyle = {
+
+  //   }
+  // }
   ngOnInit() {
-    this.setPage();
-    this.getAllUser();
+    this.getPageUser(this.iPage);
+    // this.getAllUser();
     this.getTotalPage();
   }
-  getAllUser(): void {
-    this.userService
-      .getAllUser()
-      .subscribe((res) => {
-        this.userData = res.data;
-        console.log(res.data);
-      });
-  }
+  // getAllUser(): void {
+  //   this.userService
+  //     .getAllUser()
+  //     .subscribe((res) => {
+  //       this.userData = res.data;
+  //       console.log(res.data);
+  //     });
+  // }
   getTotalPage(): void {
     this.userService
-      .getAllUser()
+      .getPageUsers(this.iPage)
       .subscribe((res) => {
         // this.totalPage = res.totalPage;
         for (let i = 1; i <= res.totalPage; i++) {
           this.totalPage.push(i);
         }
-        console.log(this.totalPage);
+        // console.log(this.totalPage);
       });
   }
-  setPage() {
-    Page.iPage = 2;
+  getPageUser(id) {
+    return this.userService
+      .getPageUsers(id)
+      .subscribe(res => {
+        // console.log(res.data);
+        this.userData = res.data;
+      });
   }
-  onSelect(user: Account): void {
+  getShowStatus(memorized: boolean) {
+  }
+  setStatus(user: Account): void {
     this.selectedUser = user;
     // console.log(`selectedUser = ${JSON.stringify(this.selectedUser._id)}`);
     // this.termUser.id = this.selectedUser._id;
     // console.log(this.termUser);
-    console.log(this.selectedUser._id);
+    // console.log(this.selectedUser._id);
     this.termUser = {
       id: this.selectedUser._id,
       status: this.selectedUser.status === 'true' ? this.selectedUser.status = 'false' : this.selectedUser.status = 'true'
     };
-    console.log(this.termUser);
+    // console.log(this.termUser);
     this.userService
       .setStatus(JSON.stringify(this.termUser))
       .subscribe(res => console.log(res));
   }
+
 }

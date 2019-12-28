@@ -14,8 +14,13 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Quản Lý Thành Viên</h3>
-
+                    <h4>Lọc trạng thái
+                        <select [(ngModel)]="filterStatus">
+                          <option value="XEM_TAT_CA" selected>Xem tất cả</option>
+                          <option value="ACTIVE">Active</option>
+                          <option value="BLOCK">Block</option>
+                        </select>
+                    </h4>
                     <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="table_search" [(ngModel)]="searchText" class="form-control pull-right" placeholder="Tìm kiếm...">
@@ -35,11 +40,13 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             <tr *ngFor="let users of userData | filter:searchText; index as i">
                                 <td>{{i+1}}</td>
                                 <td>{{users.username}}</td>
-                                <td>{{users.createdDay}}</td>
-                                <td><button type="button" class="btn btn-block btn-success" [class.selected]="users === selectedUser" (click)="onSelect(users)">{{users.status}}</button></td>
+                                <td>{{users.createdDay | date:'medium'}}</td>
+                                <td><button (click)="setStatus(users)" [class]="users.status === true ? 'lable label-success' : 'lable label-danger'">{{users.status === true ? 'Active' : 'Block'}} </button></td>
+                                <!-- <td><button type="button" [style.class]="users.status === 'true' ? 'red' : 'blue' " [class.selected]="users === selectedUser" (click)="setStatus(users)">{{users.status}}</button></td> -->
                                 <td>{{users.role}}</td>
                             </tr>
                         </tbody>
@@ -50,7 +57,7 @@
                     <ul class="pagination pagination-sm no-margin pull-right">
                         <li><a href="#">«</a></li>
                         <li *ngFor="let item of totalPage">
-                            <a (click)="setPage()">{{item}}</a>
+                            <a (click)="getPageUser(item)">{{item}}</a>
                         </li>
                         <li><a href="#">»</a></li>
                     </ul>

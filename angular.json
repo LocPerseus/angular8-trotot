@@ -37,8 +37,7 @@
                             "src/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js",
                             "src/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js",
                             "src/assets/bower_components/chart.js/Chart.js",
-                            "src/assets/dist/js/pages/dashboard2.js",
-                            "src/assets/dist/js/demo.js"
+
                         ]
                     },
                     "configurations": {

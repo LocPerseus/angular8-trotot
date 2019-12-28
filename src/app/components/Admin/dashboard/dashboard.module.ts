@@ -10,6 +10,7 @@ import { NewsComponent } from './Pages/news/news.component';
 import { HomeDashboardComponent } from './Pages/home-dashboard/home-dashboard.component';
 import { ModalCategoryComponent } from './Pages/modal-category/modal-category.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 // ngbBoostrap
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +26,8 @@ import { DetailMemberComponent } from './Pages/member/detail-member/detail-membe
     NgbModule,
     DashboardRoutingModule,
     LayoutModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ]
 })
 export class DashboardModule { }
