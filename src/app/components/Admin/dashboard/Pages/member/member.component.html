@@ -45,9 +45,18 @@
                                 <td>{{i+1}}</td>
                                 <td>{{users.username}}</td>
                                 <td>{{users.createdDay | date:'medium'}}</td>
-                                <td><button (click)="setStatus(users)" [class]="users.status === true ? 'lable label-success' : 'lable label-danger'">{{users.status === true ? 'Active' : 'Block'}} </button></td>
-                                <!-- <td><button type="button" [style.class]="users.status === 'true' ? 'red' : 'blue' " [class.selected]="users === selectedUser" (click)="setStatus(users)">{{users.status}}</button></td> -->
-                                <td>{{users.role}}</td>
+                                <td>
+                                    <button (click)="setStatus(users)" [class]="users.status === true ? 'lable label-success' : 'lable label-danger'">
+                                      {{users.status === true ? 'Active' : 'Block'}}
+                                    </button>
+                                </td>
+                                <td>
+
+
+                                    <button (click)="setRole(users)" [class]="users.role == 'user' ? 'lable label-danger' : 'lable label-success'">
+                                     {{users.role}}
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

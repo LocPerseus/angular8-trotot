@@ -29,10 +29,12 @@ export class NewsService {
     .pipe(
       map(res => {
         // console.log(res);
-        // res.data.map(rs => {
-        //   // tslint:disable-next-line: no-unused-expression
-        //   rs;
-        // });
+        res.data.map(rs => {
+          // tslint:disable-next-line: no-unused-expression
+          // rs.address;
+          // console.log(rs.address);
+          // tslint:disable-next-line: no-unused-expression
+        });
         return res;
       })
     );
@@ -53,7 +55,16 @@ export class NewsService {
         catchError(err => this.errorHandler(err))
       );
   }
-
+  deleteNews(id: number): Observable<DataNews> {
+    return this.http
+      .delete<DataNews>(`${this._url}/${id}`)
+      .pipe(
+        tap(
+          res => console.log(res)
+        ),
+        catchError(err => this.errorHandler(err))
+      );
+  }
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server error');
   }

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { window } from 'rxjs/operators';
+
 // import { CategoryService } from '../../../../../category.service';
 @Component({
   selector: 'app-category',
@@ -20,6 +20,7 @@ export class CategoryComponent implements OnInit {
   email: string;
   phoneNumber: string;
   birthDay: Date;
+  select = false;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -82,5 +83,8 @@ export class CategoryComponent implements OnInit {
     Object.assign(this.user, values);
   }
 
+  onSelectedPass() {
+    this.select = true;
+  }
 
 }

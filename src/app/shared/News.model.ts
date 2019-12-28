@@ -1,7 +1,9 @@
+import { Address } from './../models/address';
 export class News {
   constructor(
     public status: number,
     public image: [],
+    public address: Address,
     // tslint:disable-next-line: variable-name
     public _id: string,
     public title: string,

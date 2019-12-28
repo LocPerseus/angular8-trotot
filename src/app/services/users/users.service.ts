@@ -47,6 +47,14 @@ export class UsersService {
         catchError(err => this.errorHandler(err))
       );
   }
+  setRole(user: any, id: number): Observable<DataUser> {
+    return this.http
+      .patch<DataUser>(`${this.url}/${id}`, user, httpOption)
+      .pipe(
+        tap(role => console.log(`updated member = ${JSON.stringify(role)}`)),
+        catchError(err => this.errorHandler(err))
+      );
+  }
   // tslint:disable-next-line: no-shadowed-variable
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server error');

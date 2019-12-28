@@ -1,8 +1,6 @@
-import { Page } from './../../../../../models/page';
 import { Account } from './../../../../../models/account';
 import { UsersService } from './../../../../../services/users/users.service';
 import { Component, OnInit } from '@angular/core';
-import { TermUser } from 'src/app/models/TermUser';
 
 @Component({
   selector: 'app-member',
@@ -18,15 +16,14 @@ export class MemberComponent implements OnInit {
   totalPage = [];
   searchText;
   selectedUser: Account;
-  termUser: {};
+  termUser: {
+    id: string,
+    status: boolean
+  };
+  termRole: {};
   iPage = 1;
   filterStatus = 'XEM_TAT_CA';
-  currentStyle: {};
-  // setStyleStatus() {
-  //   this.currentStyle = {
-
-  //   }
-  // }
+  id;
   ngOnInit() {
     this.getPageUser(this.iPage);
     // this.getAllUser();
@@ -69,12 +66,26 @@ export class MemberComponent implements OnInit {
     // console.log(this.selectedUser._id);
     this.termUser = {
       id: this.selectedUser._id,
-      status: this.selectedUser.status === 'true' ? this.selectedUser.status = 'false' : this.selectedUser.status = 'true'
+      status: this.selectedUser.status === true ? this.selectedUser.status = false : this.selectedUser.status = true
     };
     // console.log(this.termUser);
     this.userService
       .setStatus(JSON.stringify(this.termUser))
-      .subscribe(res => console.log(res));
+      .subscribe(res => {
+        // console.log(res)
+      });
+  }
+  setRole(user: Account): void {
+    this.selectedUser = user;
+    this.id = this.selectedUser._id;
+    this.termRole = {
+      role: this.selectedUser.role == 'user' ? this.selectedUser.role = 'admin' : this.selectedUser.role = 'user'
+    };
+    this.userService
+      .setRole(JSON.stringify(this.termRole), this.id)
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
 }
